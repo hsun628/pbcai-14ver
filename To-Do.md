@@ -361,3 +361,12 @@ To-Do:
 - Camerer 實驗資料分析方法
 - 只用選擇估計or加入受試者理由估計學習模型 (EWA)
   - p-beauty: Cournot best respeonse -> anticipatory learning
+
+### 4/9
+- 受試者用英文寫理由可能讓第四部份其他受試者的預測正確率下降
+
+
+### 4/11
+- phase_AI放到第三部分後
+- 報酬改為 1法幣 = 0.25新台幣 (pilot平均報酬為675/平均1050法幣)
+- pilot收斂太快 -> 找收斂較慢的實驗

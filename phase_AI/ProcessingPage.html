@@ -37,7 +37,7 @@
             const statusMsg = document.getElementById('status-msg');
             const messages = [
                 "等待獨立的ChatGPT判斷結果中...",
-                "此過程大約需要1-3分鐘，請勿重新整理或關閉視窗。"
+                "此過程大約需要30秒-1分鐘，請勿重新整理或關閉視窗。"
             ];
             let currentIndex = 0;
 
@@ -68,7 +68,7 @@
             // 3. 處理來自 live_method 的回傳數據
             window.liveRecv = function(data) {
                 if (data.status === "started") {
-                    statusMsg.innerText = "此過程大約需要1-3分鐘，請勿重新整理或關閉視窗。";
+                    statusMsg.innerText = "此過程大約需要30秒-1分鐘，請勿重新整理或關閉視窗。";
                 }
                 
                 if (data.status === "finished") {

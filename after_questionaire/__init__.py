@@ -11,7 +11,7 @@ class C(BaseConstants):
     NUM_ROUNDS = 3 if DEBUG else 10
     Prediction_Reward = 50
     reasoning_rounds = [1, 3] if DEBUG else [1, 5, 10]
-    exchange_rate = 0.5   # exchange rate for NTD
+    exchange_rate = 0.25   # exchange rate for NTD
     participation_fee = 150
 
 class Subsession(BaseSubsession):
@@ -191,7 +191,7 @@ class Payoff(Page):
                 player.participant.vars["fee_added"] = True
 
         return {
-            "total_payoff_no_participation_fee": player.participant.vars.get('points_before_fee'),
+            "total_payoff_no_participation_fee": int(player.participant.vars.get('points_before_fee')),
             "total_NTD_payoff": player.participant.payoff
         }
     
