@@ -4,10 +4,9 @@ from otree.api import *
 from settings import DEBUG
 from settings import num_participant
 
-
 class C(BaseConstants):
     NAME_IN_URL = 'after_questionaire'
-    PLAYERS_PER_GROUP = 4 if DEBUG else int(num_participant) # wait for all 7 participants
+    PLAYERS_PER_GROUP = 2 if DEBUG else (int(num_participant) // 2)
     NUM_ROUNDS = 3 if DEBUG else 10
     Prediction_Reward = 50
     reasoning_rounds = [1, 3] if DEBUG else [1, 5, 10]
@@ -15,15 +14,16 @@ class C(BaseConstants):
     participation_fee = 150
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        if self.round_number == 1:
+            self.group_like_round("phase_1", 1)
 
 class Group(BaseGroup):
     pass
 
 def calculate_results(group:Group):
     for p in group.get_players():
-        all_players = p.subsession.get_players()
-        target_p = [tp for tp in all_players if tp.id_in_subsession == p.target_participant_id][0]
+        target_p = next(tp for tp in group.get_players() if tp.id_in_subsession == p.target_participant_id)
 
         history = target_p.participant.vars.get("reason_history", [])
 
@@ -91,8 +91,7 @@ class Prediction(Page):
     @staticmethod
     def vars_for_template(player):
         if player.field_maybe_none("target_participant_id") is None:
-            all_players = player.subsession.get_players()
-            other_players = [p for p in all_players if p.id_in_subsession != player.id_in_subsession]
+            other_players = player.get_others_in_group()
             target = random.choice(other_players)   
             player.target_participant_id = target.id_in_subsession
         

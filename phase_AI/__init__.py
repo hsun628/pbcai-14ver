@@ -23,7 +23,7 @@ client = OpenAI(api_key = my_api_key)  # DO NOT PASTE YOUR API_KEY HERE!
 
 class C(BaseConstants):
     NAME_IN_URL = 'phase_AI'
-    PLAYERS_PER_GROUP = 2 if DEBUG else int(num_participant) # this is the 7-participant ver.
+    PLAYERS_PER_GROUP = 2 if DEBUG else (int(num_participant) // 2)
     NUM_ROUNDS = 3 if DEBUG else 10
     Pass_Reward = 100 # the payoff for players who pass the reason assessment
     reasoning_rounds = [1, 3] if DEBUG else [1, 5, 10]
@@ -60,7 +60,9 @@ class C(BaseConstants):
     ]
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        if self.round_number == 1:
+            self.group_like_round("phase_1", 1)
 
 class Group(BaseGroup):
     pass 

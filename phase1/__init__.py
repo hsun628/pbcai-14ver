@@ -6,7 +6,7 @@ from settings import num_participant
 
 class C(BaseConstants):
     NAME_IN_URL = 'phase1'
-    PLAYERS_PER_GROUP = 4 if DEBUG else int(num_participant) # wait for all 12 participants
+    PLAYERS_PER_GROUP = 4 if DEBUG else int(num_participant)
     NUM_ROUNDS = 1 if DEBUG else 3
     Correct_Prediction = ["A", "B", "Tie"] # predefined correct predictions (may be randomized)
     Prediction_Reward = cu(50)
@@ -35,7 +35,7 @@ class C(BaseConstants):
     }
 
 class Subsession(BaseSubsession):
-    pass
+    pass             
 
 class Group(BaseGroup):
     pass
