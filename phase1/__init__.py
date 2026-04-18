@@ -6,7 +6,7 @@ from settings import num_participant
 
 class C(BaseConstants):
     NAME_IN_URL = 'phase1'
-    PLAYERS_PER_GROUP = 4 if DEBUG else int(num_participant)
+    PLAYERS_PER_GROUP = 4 if DEBUG else (int(num_participant) // 2)
     NUM_ROUNDS = 1 if DEBUG else 3
     Correct_Prediction = ["A", "B", "Tie"] # predefined correct predictions (may be randomized)
     Prediction_Reward = cu(50)
@@ -117,6 +117,8 @@ class Results(Page):
 
 class ResultsWaitPage(WaitPage):
     title_text = "請等待其他受試者確認結果"
+
+    wait_for_all_groups = True
 
 page_sequence = [
     welcome,
